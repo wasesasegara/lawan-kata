@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B9AD82723ED3C01005A9933 /* CommonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9AD82623ED3C01005A9933 /* CommonHelper.swift */; };
+		9B9AD82923ED3C9E005A9933 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9AD82823ED3C9E005A9933 /* Extension+UIView.swift */; };
+		9B9AD82B23ED3D2A005A9933 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9AD82A23ED3D2A005A9933 /* Constants.swift */; };
 		9BD6AFF923EC141D00142D69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6AFF823EC141D00142D69 /* AppDelegate.swift */; };
 		9BD6AFFB23EC141D00142D69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6AFFA23EC141D00142D69 /* SceneDelegate.swift */; };
 		9BD6AFFD23EC141D00142D69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6AFFC23EC141D00142D69 /* ViewController.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B9AD82623ED3C01005A9933 /* CommonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHelper.swift; sourceTree = "<group>"; };
+		9B9AD82823ED3C9E005A9933 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		9B9AD82A23ED3D2A005A9933 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BD6AFF523EC141D00142D69 /* Lawan Kata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lawan Kata.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD6AFF823EC141D00142D69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BD6AFFA23EC141D00142D69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +69,9 @@
 				9BD6B00123EC141E00142D69 /* Assets.xcassets */,
 				9BD6B00323EC141E00142D69 /* LaunchScreen.storyboard */,
 				9BD6B00623EC141E00142D69 /* Info.plist */,
+				9B9AD82623ED3C01005A9933 /* CommonHelper.swift */,
+				9B9AD82823ED3C9E005A9933 /* Extension+UIView.swift */,
+				9B9AD82A23ED3D2A005A9933 /* Constants.swift */,
 			);
 			path = "Lawan Kata";
 			sourceTree = "<group>";
@@ -140,7 +149,10 @@
 			files = (
 				9BD6AFFD23EC141D00142D69 /* ViewController.swift in Sources */,
 				9BD6AFF923EC141D00142D69 /* AppDelegate.swift in Sources */,
+				9B9AD82923ED3C9E005A9933 /* Extension+UIView.swift in Sources */,
+				9B9AD82723ED3C01005A9933 /* CommonHelper.swift in Sources */,
 				9BD6AFFB23EC141D00142D69 /* SceneDelegate.swift in Sources */,
+				9B9AD82B23ED3D2A005A9933 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +296,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QY3HCSBXC;
 				INFOPLIST_FILE = "Lawan Kata/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -292,6 +306,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Raih-Nyata.Lawan-Kata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -301,7 +316,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QY3HCSBXC;
 				INFOPLIST_FILE = "Lawan Kata/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -309,6 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Raih-Nyata.Lawan-Kata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

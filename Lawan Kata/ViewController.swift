@@ -8,13 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
+    @IBOutlet weak var viewObject: UIView!
+    @IBOutlet weak var segmentSwitch: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        overrideUserInterfaceStyle = .light
+        setupObject()
     }
-
+    
+    private func setupObject() {
+        guard let object = viewObject else { return }
+        object.frame = CGRect(origin: .zero, size: CGSize(width: Constants.minSize, height: Constants.minSize))
+        moveToBottomCenter()
+    }
+    
+    private func moveToBottomCenter() {
+        guard let object = viewObject else { return }
+        object.center = CGPoint(x: view.center.x, y: view.height() - Constants.bottomPoint - object.height() / 2)
+    }
 
 }
 
