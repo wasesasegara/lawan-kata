@@ -10,8 +10,8 @@ import UIKit
 
 class Constants {
     
-    static let bottomPoint: CGFloat = 100
-    static let maxSafeSize: CGFloat = 0.8
+    static let safeHorizontalMargin: CGFloat = 50
+    static let safeVerticalMargin: CGFloat = 100
     static let minSize: Int = 50
 
 }

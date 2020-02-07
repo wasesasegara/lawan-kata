@@ -33,23 +33,35 @@ final class ViewController: UIViewController {
     
     private func moveToBottomCenter() {
         guard let object = viewObject else { return }
-        object.center = CGPoint(x: view.center.x, y: view.height() - Constants.bottomPoint - object.height() / 2)
+        object.center = CGPoint(x: view.center.x, y: view.height() - Constants.safeVerticalMargin - object.height() / 2)
     }
     
     private func setupSegment() { }
     
     private func refreshRect() {
         guard let object = viewObject else { return }
-        view.layer.removeAllAnimations()
-        width += dif > 0 ? 10 : -10
-        height += dif > 0 ? 10 : -10
-        if width > 300 || height > 300 {
-            width = 300
-            height = 300
-        } else if width < 50 || height < 50 {
-            width = 50
-            height = 50
+        if object.width() >= object.height() {
+            width += dif
+            if width > view.safeWidth().max || width < view.safeWidth().min {
+                width -= dif
+                animateObject()
+                return
+            }
+            height += dif
+        } else {
+            height += dif
+            if height > view.safeHeight().max || height < view.safeHeight().min {
+                height -= dif
+                animateObject()
+                return
+            }
+            width += dif
         }
+        animateObject()
+    }
+    
+    private func animateObject() {
+        guard let object = viewObject else { return }
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             object.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height)
             self.moveToBottomCenter()

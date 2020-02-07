@@ -19,15 +19,11 @@ extension UIView {
     }
     
     func safeWidth() -> (min: CGFloat, max: CGFloat) {
-        return (CGFloat(50), width() * Constants.maxSafeSize)
+        return (CGFloat(50), width() - 2 * Constants.safeHorizontalMargin)
     }
     
     func safeHeight() -> (min: CGFloat, max: CGFloat) {
-        return (CGFloat(50), height() * Constants.maxSafeSize)
-    }
-    
-    func sizeDiff(view: UIView) -> (width: CGFloat, height: CGFloat) {
-        return (safeWidth().max - safeWidth().min, safeHeight().max - safeHeight().min - Constants.bottomPoint)
+        return (CGFloat(50), height() - 2 * Constants.safeVerticalMargin)
     }
 
 }
