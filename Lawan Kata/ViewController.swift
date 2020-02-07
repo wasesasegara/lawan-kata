@@ -12,12 +12,16 @@ final class ViewController: UIViewController {
 
     private var dif: CGFloat = 0
     private var origin: CGFloat = 0
-    private var scale: CGFloat = 1
     private var width: CGFloat = 128
     private var height: CGFloat = 128
     
     @IBOutlet weak var viewObject: UIView!
     @IBOutlet weak var segmentSwitch: UISegmentedControl!
+    
+    enum Dimension: Int {
+        case size = 0
+        case height
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,23 +43,39 @@ final class ViewController: UIViewController {
     private func setupSegment() { }
     
     private func refreshRect() {
+        guard let segment = segmentSwitch else { return }
+        switch segment.selectedSegmentIndex {
+        case Dimension.size.rawValue:
+            updateSize()
+        case Dimension.height.rawValue:
+            updateHeight()
+        default:
+            break
+        }
+    }
+    
+    private func updateSize() {
         guard let object = viewObject else { return }
+        width += dif
+        height += dif
         if object.width() >= object.height() {
-            width += dif
             if width > view.safeWidth().max || width < view.safeWidth().min {
                 width -= dif
-                animateObject()
-                return
-            }
-            height += dif
-        } else {
-            height += dif
-            if height > view.safeHeight().max || height < view.safeHeight().min {
                 height -= dif
-                animateObject()
-                return
             }
-            width += dif
+        } else if object.height() >= object.width() {
+            if height > view.safeHeight().max || height < view.safeHeight().min {
+                width += dif
+                height -= dif
+            }
+        }
+        animateObject()
+    }
+    
+    private func updateHeight() {
+        height += dif
+        if height > view.safeHeight().max || height < view.safeHeight().min {
+            height -= dif
         }
         animateObject()
     }
