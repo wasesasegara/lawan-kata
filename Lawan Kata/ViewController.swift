@@ -118,9 +118,9 @@ final class ViewController: UIViewController {
     
     private func updateCorner() {
         let max = width > height ? height / 2 : width / 2
-        corner += dif
+        corner -= dif
         if corner > max || corner < 0 {
-            corner -= dif
+            corner += dif
         }
         animateObject()
     }
@@ -148,13 +148,6 @@ final class ViewController: UIViewController {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let originTouch = touches.first?.location(in: self.view) else { return }
-        dif = origin.y - originTouch.y + originTouch.x - origin.x
-        refreshRect()
-        origin = originTouch
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let originTouch = touches.first?.location(in: self.view) else { return }
         dif = origin.y - originTouch.y + originTouch.x - origin.x
         refreshRect()
