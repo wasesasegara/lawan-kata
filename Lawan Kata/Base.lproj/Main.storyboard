@@ -27,9 +27,18 @@
                                     <segment title="Tinggi"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sne-69-tDq">
+                                <rect key="frame" x="355" y="80.5" width="39" height="30"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="tapResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Te-nu-Hjv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sne-69-tDq" secondAttribute="trailing" constant="20" id="P6H-TG-m7c"/>
+                            <constraint firstItem="sne-69-tDq" firstAttribute="centerY" secondItem="fqV-bf-YNG" secondAttribute="centerY" id="XVY-bA-4R1"/>
                             <constraint firstItem="fqV-bf-YNG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h6R-21-Z5E"/>
                             <constraint firstItem="fqV-bf-YNG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="36" id="hhD-aS-AYF"/>
                         </constraints>

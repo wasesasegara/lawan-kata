@@ -90,6 +90,12 @@ final class ViewController: UIViewController {
         }
     }
     
+    private func resetState() {
+        width = view.safeWidth().min
+        height = view.safeHeight().min
+        animateObject()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let originTouch = touches.first?.location(in: self.view) else { return }
         origin = originTouch.y
@@ -102,4 +108,8 @@ final class ViewController: UIViewController {
         origin = originTouch.y
     }
 
+    @IBAction func tapResetButton(_ sender: Any) {
+        resetState()
+    }
+    
 }
