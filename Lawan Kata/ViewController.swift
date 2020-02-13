@@ -14,6 +14,7 @@ final class ViewController: UIViewController {
     private var origin: CGFloat = 0
     private var width: CGFloat = 128
     private var height: CGFloat = 128
+    private var corner: CGFloat = 4
     
     @IBOutlet weak var viewObject: UIView!
     @IBOutlet weak var segmentSwitch: UISegmentedControl!
@@ -21,26 +22,35 @@ final class ViewController: UIViewController {
     enum Dimension: Int {
         case size = 0
         case height
+        case corner
+        case opacity
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         setupObject()
+        setupSegment()
     }
     
     private func setupObject() {
         guard let object = viewObject else { return }
         object.frame = CGRect(origin: .zero, size: CGSize(width: Constants.minSize, height: Constants.minSize))
-        moveToBottomCenter()
+        resetState()
+    }
+    
+    private func setupSegment() {
+        segmentSwitch.removeAllSegments()
+        segmentSwitch.insertSegment(withTitle: "Besar", at: Dimension.size.rawValue, animated: false)
+        segmentSwitch.insertSegment(withTitle: "Tinggi", at: Dimension.height.rawValue, animated: false)
+        segmentSwitch.insertSegment(withTitle: "Tajam", at: Dimension.corner.rawValue, animated: false)
+        segmentSwitch.selectedSegmentIndex = 0
     }
     
     private func moveToBottomCenter() {
         guard let object = viewObject else { return }
         object.center = CGPoint(x: view.center.x, y: view.height() - Constants.safeVerticalMargin - object.height() / 2)
     }
-    
-    private func setupSegment() { }
     
     private func refreshRect() {
         guard let segment = segmentSwitch else { return }
@@ -49,6 +59,8 @@ final class ViewController: UIViewController {
             updateSize()
         case Dimension.height.rawValue:
             updateHeight()
+        case Dimension.corner.rawValue:
+            updateCorner()
         default:
             break
         }
@@ -58,6 +70,8 @@ final class ViewController: UIViewController {
         let perspective = width > height ? height / width : width / height
         let widthDiff = dif * perspective
         let heightDiff = dif * perspective
+        let oldWidth = width
+        let oldHeight = height
         width += widthDiff
         height += heightDiff
         
@@ -65,6 +79,14 @@ final class ViewController: UIViewController {
            height > view.safeHeight().max || height < view.safeHeight().min {
                width -= widthDiff
                height -= heightDiff
+        }
+        
+        let shortest = width > height ? height / 2 : width / 2
+        let oldShortest = oldWidth > oldHeight ? oldHeight / 2 : oldWidth / 2
+        if corner > shortest {
+            corner = shortest
+        } else {
+            corner = shortest / oldShortest * corner
         }
         
         animateObject()
@@ -82,15 +104,27 @@ final class ViewController: UIViewController {
         guard let object = viewObject else { return }
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             object.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height)
+            object.layer.cornerRadius = self.corner
             self.moveToBottomCenter()
         }) { (_) in
             
         }
     }
     
+    private func updateCorner() {
+        let max = width > height ? height / 2 : width / 2
+        corner += dif
+        if corner > max || corner < 0 {
+            corner -= dif
+        }
+        animateObject()
+    }
+    
     private func resetState() {
-        width = view.safeWidth().min
-        height = view.safeHeight().min
+        width = CGFloat(Constants.minSize)
+        height = CGFloat(Constants.minSize)
+        corner = 4
+        moveToBottomCenter()
         animateObject()
     }
     
