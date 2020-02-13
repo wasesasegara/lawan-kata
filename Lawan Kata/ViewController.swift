@@ -11,10 +11,11 @@ import UIKit
 final class ViewController: UIViewController {
 
     private var dif: CGFloat = 0
-    private var origin: CGFloat = 0
+    private var origin: CGPoint = .zero
     private var width: CGFloat = 128
     private var height: CGFloat = 128
     private var corner: CGFloat = 4
+    private var opacity: CGFloat = 1
     
     @IBOutlet weak var viewObject: UIView!
     @IBOutlet weak var segmentSwitch: UISegmentedControl!
@@ -44,6 +45,7 @@ final class ViewController: UIViewController {
         segmentSwitch.insertSegment(withTitle: "Besar", at: Dimension.size.rawValue, animated: false)
         segmentSwitch.insertSegment(withTitle: "Tinggi", at: Dimension.height.rawValue, animated: false)
         segmentSwitch.insertSegment(withTitle: "Tajam", at: Dimension.corner.rawValue, animated: false)
+        segmentSwitch.insertSegment(withTitle: "Jelas", at: Dimension.opacity.rawValue, animated: false)
         segmentSwitch.selectedSegmentIndex = 0
     }
     
@@ -61,6 +63,8 @@ final class ViewController: UIViewController {
             updateHeight()
         case Dimension.corner.rawValue:
             updateCorner()
+        case Dimension.opacity.rawValue:
+            updateOpacity()
         default:
             break
         }
@@ -105,6 +109,7 @@ final class ViewController: UIViewController {
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
             object.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height)
             object.layer.cornerRadius = self.corner
+            object.alpha = self.opacity
             self.moveToBottomCenter()
         }) { (_) in
             
@@ -124,20 +129,36 @@ final class ViewController: UIViewController {
         width = CGFloat(Constants.minSize)
         height = CGFloat(Constants.minSize)
         corner = 4
+        opacity = 1
         moveToBottomCenter()
+        animateObject()
+    }
+    
+    private func updateOpacity() {
+        opacity += dif * 0.1
+        if opacity > 1 || opacity < 0 {
+            opacity -= dif * 0.1
+        }
         animateObject()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let originTouch = touches.first?.location(in: self.view) else { return }
-        origin = originTouch.y
+        origin = originTouch
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let originTouch = touches.first?.location(in: self.view) else { return }
-        dif = origin - originTouch.y
+        dif = origin.y - originTouch.y + originTouch.x - origin.x
         refreshRect()
-        origin = originTouch.y
+        origin = originTouch
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let originTouch = touches.first?.location(in: self.view) else { return }
+        dif = origin.y - originTouch.y + originTouch.x - origin.x
+        refreshRect()
+        origin = originTouch
     }
 
     @IBAction func tapResetButton(_ sender: Any) {
