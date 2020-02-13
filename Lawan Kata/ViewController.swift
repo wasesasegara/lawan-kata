@@ -55,20 +55,18 @@ final class ViewController: UIViewController {
     }
     
     private func updateSize() {
-        guard let object = viewObject else { return }
-        width += dif
-        height += dif
-        if object.width() >= object.height() {
-            if width > view.safeWidth().max || width < view.safeWidth().min {
-                width -= dif
-                height -= dif
-            }
-        } else if object.height() >= object.width() {
-            if height > view.safeHeight().max || height < view.safeHeight().min {
-                width += dif
-                height -= dif
-            }
+        let perspective = width > height ? height / width : width / height
+        let widthDiff = dif * perspective
+        let heightDiff = dif * perspective
+        width += widthDiff
+        height += heightDiff
+        
+        if width > view.safeWidth().max || width < view.safeWidth().min ||
+           height > view.safeHeight().max || height < view.safeHeight().min {
+               width -= widthDiff
+               height -= heightDiff
         }
+        
         animateObject()
     }
     

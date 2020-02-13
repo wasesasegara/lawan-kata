@@ -11,7 +11,7 @@ import UIKit
 class Constants {
     
     static let safeHorizontalMargin: CGFloat = 50
-    static let safeVerticalMargin: CGFloat = 100
+    static let safeVerticalMargin: CGFloat = 200
     static let minSize: Int = 50
 
 }
